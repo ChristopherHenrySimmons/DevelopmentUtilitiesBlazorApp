@@ -1,0 +1,63 @@
+﻿@page "/Exercises"
+@inject HttpClient Http
+
+<h1>Exercises</h1>
+
+<button class="btn btn-success" @onclick="@GetExercises">Get Exercises List</button>
+
+<br />
+
+<table class="table">
+     <thead class="thead-dark">
+          <tr>
+               <th>Id</th>
+               <th>Exercise</th>
+               <th>Solution</th>
+               <th>VarableData</th>
+               <th>ExerciseLevel</th>
+               <th>ProjectType</th>
+               <th>Langues</th>
+               <th>ExpectedSolution</th>
+          </tr>
+     </thead>
+
+     <tbody>
+          @foreach (var item in @_Exercises)
+          {
+               <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Exercise</td>
+                    <td>@item.Solution</td>
+                    <td>@item.VarableData</td>
+                    <td>@item.ExerciseLevel</td>
+                    <td>@item.ProjectType</td>
+                    <td>@item.Langues</td>
+                    <td>@item.ExpectedSolution</td>
+               </tr>
+
+          }
+     </tbody>
+
+</table>
+
+@code
+{
+     List<_Exercise> _Exercises = new List<_Exercise>();
+
+     private async Task GetExercises()
+     {
+          _Exercises = await Http.GetJsonAsync<List<_Exercise>>("https://localhost:44347/api/v1/Exercises");
+     }
+
+     public partial class _Exercise
+     {
+          public int Id { get; set; }
+          public string Exercise { get; set; }
+          public string Solution { get; set; }
+          public string VarableData { get; set; }
+          public string ExerciseLevel { get; set; }
+          public string ProjectType { get; set; }
+          public string Langues { get; set; }
+          public string ExpectedSolution { get; set; }
+     }
+}

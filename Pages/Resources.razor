@@ -1,0 +1,54 @@
+﻿@page "/Resources"
+@inject HttpClient Http
+
+<h1>Resources</h1>
+
+<button class="btn btn-success" @onclick="@GetResources">Get Resources List</button>
+
+<br />
+
+<table class="table">
+     <thead class="thead-dark">
+          <tr>
+               <th>Id</th>
+               <th>Title</th>
+               <th>Description</th>
+               <th>Link</th>
+               <th>Langues</th>
+          </tr>
+     </thead>
+
+     <tbody>
+          @foreach (var item in @_Resources)
+          {
+               <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Title</td>
+                    <td>@item.Description</td>
+                    <td>@item.Link</td>
+                    <td>@item.Langues</td>
+               </tr>
+
+          }
+     </tbody>
+
+</table>
+
+@code
+{
+     List<_Resource> _Resources = new List<_Resource>();
+
+     private async Task GetResources()
+     {
+          _Resources = await Http.GetJsonAsync<List<_Resource>>("https://localhost:44347/api/v1/Resources");
+     }
+
+     public partial class _Resource
+     {
+          public int Id { get; set; }
+          public string Title { get; set; }
+          public string Description { get; set; }
+          public string Link { get; set; }
+          public string Langues { get; set; }
+     }
+}

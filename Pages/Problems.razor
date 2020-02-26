@@ -1,0 +1,57 @@
+﻿@page "/Problems"
+@inject HttpClient Http
+
+<h1 class="alert-light">Problems</h1>
+
+<button class="btn btn-success" @onclick="@GetProblems">Get Problems List</button>
+
+<br />
+
+<table class="table">
+     <thead class="thead-dark">
+          <tr>
+               <th>Id</th>
+               <th>Tile</th>
+               <th>Solution</th>
+               <th>Link</th>
+               <th>Details</th>
+          </tr>
+     </thead>
+
+     <tbody>
+          @foreach (var item in @_Problems)
+          {
+          <tr>
+               <td>@item.Id</td>
+               <td>@item.Title</td>
+               @*@{item.Solution != string.IsNullOrWhiteSpace } //Add if else statement for Solution class = "bg-success"*@
+               <td>@item.Solution</td>
+               <td>@item.SolutionLink</td>
+               <td>@item.Details</td>
+          </tr>
+
+          }
+     </tbody>
+
+</table>
+
+@code
+{
+     List<_Problem> _Problems = new List<_Problem>();
+
+     private async Task GetProblems()
+     {
+          _Problems = await Http.GetJsonAsync<List<_Problem>>("https://localhost:44347/api/v1/Problems");
+     }
+
+     public partial class _Problem
+     {
+          public int Id { get; set; }
+          public string Title { get; set; }
+          public string Solution { get; set; }
+          public string SolutionLink { get; set; }
+          public string Details { get; set; }
+     }
+     
+     
+}

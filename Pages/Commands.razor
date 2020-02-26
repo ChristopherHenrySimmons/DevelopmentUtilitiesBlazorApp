@@ -1,0 +1,51 @@
+﻿@page "/Commands"
+@inject HttpClient Http
+
+<h1>Commands</h1>
+
+<button class="btn btn-success" @onclick="@GetCommands">Get Commands List</button>
+
+<br />
+
+<table class="table">
+     <thead class="thead-dark">
+          <tr>
+               <th>Id</th>
+               <th>Title</th>
+               <th>Command</th>
+               <th>ConsoleType</th>
+          </tr>
+     </thead>
+
+     <tbody>
+          @foreach (var item in @_commands)
+          {
+               <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Tile</td>
+                    <td>@item.Command</td>
+                    <td>@item.ConsoleType</td>
+               </tr>
+
+          }
+     </tbody>
+     
+</table>
+
+@code
+{
+     List<_Command> _commands = new List<_Command>();
+
+     private async Task GetCommands()
+     {
+          _commands = await Http.GetJsonAsync<List<_Command>>("https://localhost:44347/api/v1/Commands");
+     }
+
+     public partial class _Command
+     {
+          public int Id { get; set; }
+          public string Tile { get; set; }
+          public string Command { get; set; }
+          public string ConsoleType { get; set; }
+     }
+}
