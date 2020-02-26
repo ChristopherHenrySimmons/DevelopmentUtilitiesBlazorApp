@@ -25,14 +25,14 @@
           @foreach (var item in @_Exercises)
           {
                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Exercise</td>
-                    <td>@item.Solution</td>
-                    <td>@item.VarableData</td>
-                    <td>@item.ExerciseLevel</td>
-                    <td>@item.ProjectType</td>
-                    <td>@item.Langues</td>
-                    <td>@item.ExpectedSolution</td>
+                    <td><input type="number" value="@item.Id"/></td>
+                    <td><input type="text" value="@item.Exercise"/></td>
+                    <td><input type="text" value="@item.Solution"/></td>
+                    <td><input type="text" value="@item.VarableData"/></td>
+                    <td><input type="text" value="@item.ExerciseLevel"/></td>
+                    <td><input type="text" value="@item.ProjectType"/></td>
+                    <td><input type="text" value="@item.Langues"/></td>
+                    <td><input type="text" value="@item.ExpectedSolution"/></td>
                </tr>
 
           }
