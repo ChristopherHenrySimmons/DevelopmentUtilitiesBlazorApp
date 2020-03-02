@@ -41,7 +41,7 @@
 
      private async Task GetProblems()
      {
-          _Problems = await Http.GetJsonAsync<List<_Problem>>("https://localhost:44347/api/v1/Problems");
+          _Problems = await Http.GetJsonAsync<List<_Problem>>("http://developmentutilities.eastasia.azurecontainer.io/api/v1/Problems");
      }
 
      public partial class _Problem

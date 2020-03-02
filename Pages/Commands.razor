@@ -4,8 +4,38 @@
 <h1>Commands</h1>
 
 <button class="btn btn-success" @onclick="@GetCommands">Get Commands List</button>
+<button class="btn btn-info" @onclick="@PostCommand">Create</button>
 
 <br />
+
+<form id="commandPost" action="/PostCommand" method="post" style="display:@togglePost;">
+
+     <table class="table">
+          <thead class="thead-dark">
+               <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Command</th>
+                    <th>ConsoleType</th>
+                    <th>Action</th>
+               </tr>
+          </thead>
+
+          <tbody>
+               
+                    <tr>
+                         <td><input type="type" name="name" value="" /></td>
+                         <td><input type="type" name="name" value="" /></td>
+                         <td><input type="type" name="name" value="" /></td>
+                         <td><input type="type" name="name" value="" /></td>
+                         <td><button class="btn btn-block">Edit</button></td>
+                    </tr>
+
+          </tbody>
+
+     </table>
+
+</form>
 
 <table class="table">
      <thead class="thead-dark">
@@ -14,17 +44,19 @@
                <th>Title</th>
                <th>Command</th>
                <th>ConsoleType</th>
+               <th>Action</th>
           </tr>
      </thead>
 
      <tbody>
           @foreach (var item in @_commands)
           {
-               <tr>
+               <tr>                    
                     <td>@item.Id</td>
                     <td>@item.Tile</td>
                     <td>@item.Command</td>
                     <td>@item.ConsoleType</td>
+                    <td><button class="btn btn-block">Edit</button></td>
                </tr>
 
           }
@@ -34,11 +66,13 @@
 
 @code
 {
+     public static string togglePost = "none";
+
      List<_Command> _commands = new List<_Command>();
 
      private async Task GetCommands()
      {
-          _commands = await Http.GetJsonAsync<List<_Command>>("https://localhost:44347/api/v1/Commands");
+          _commands = await Http.GetJsonAsync<List<_Command>>("http://developmentutilities.eastasia.azurecontainer.io/api/v1/Commands");
      }
 
      public partial class _Command
@@ -47,5 +81,29 @@
           public string Tile { get; set; }
           public string Command { get; set; }
           public string ConsoleType { get; set; }
+     }
+
+     private async Task PostCommand()
+     {
+          await Http.SendJsonAsync(HttpMethod.Post, "/api/Customer", new _Command
+          {
+
+          });
+     }
+
+     public class TogglePost
+     {
+          TogglePost(string togglePost)
+          {
+               if (togglePost == "none")
+               {
+                    togglePost = "block";
+               }
+               else
+               {
+                    togglePost = "none";
+               }
+
+          }
      }
 }

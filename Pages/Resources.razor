@@ -40,7 +40,7 @@
 
      private async Task GetResources()
      {
-          _Resources = await Http.GetJsonAsync<List<_Resource>>("https://localhost:44347/api/v1/Resources");
+          _Resources = await Http.GetJsonAsync<List<_Resource>>("http://developmentutilities.eastasia.azurecontainer.io/api/v1/Resources");
      }
 
      public partial class _Resource

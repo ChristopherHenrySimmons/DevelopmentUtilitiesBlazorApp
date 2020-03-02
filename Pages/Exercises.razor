@@ -46,7 +46,7 @@
 
      private async Task GetExercises()
      {
-          _Exercises = await Http.GetJsonAsync<List<_Exercise>>("https://localhost:44347/api/v1/Exercises");
+          _Exercises = await Http.GetJsonAsync<List<_Exercise>>("http://developmentutilities.eastasia.azurecontainer.io/api/v1/Exercises");
      }
 
      public partial class _Exercise
