@@ -3,9 +3,45 @@
 
 <h1>Exercises</h1>
 
-<button class="btn btn-success" @onclick="@GetExercises">Get Exercises List</button>
+<div class="mb-4">
+     <button class="btn btn-success" @onclick="@GetExercises">Show Exercises</button>
+     <button class="btn btn-success">New Exercises</button>
+</div>
 
-<br />
+<form id="commandPost" action="/PostCommand" method="post" style="display:block;">
+
+     <table class="table">
+          <thead class="thead-dark">
+               <tr>
+                    <th>Exercise</th>
+                    <th>Solution</th>
+                    <th>VarableData</th>
+                    <th>ExerciseLevel</th>
+                    <th>ProjectType</th>
+                    <th>Langues</th>
+                    <th>ExpectedSolution</th>
+                    <th>Action</th>
+               </tr>
+          </thead>
+
+          <tbody>
+
+               <tr>
+                    <td><input type="text" name="Exercise" value="" /></td>
+                    <td><input type="text" name="Solution" value="" /></td>
+                    <td><input type="text" name="VarableData" value="" /></td>
+                    <td><input type="text" name="ExerciseLevel" value="" /></td>
+                    <td><input type="text" name="ProjectType" value="" /></td>
+                    <td><input type="text" name="Langues" value="" /></td>
+                    <td><input type="text" name="ExpectedSolution" value="" /></td>
+                    <td><button class="btn btn-success">Create</button></td>
+               </tr>
+
+          </tbody>
+
+     </table>
+
+</form>
 
 <table class="table">
      <thead class="thead-dark">

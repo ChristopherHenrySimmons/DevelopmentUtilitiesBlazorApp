@@ -3,9 +3,39 @@
 
 <h1>Resources</h1>
 
-<button class="btn btn-success" @onclick="@GetResources">Get Resources List</button>
+<div class="mb-4">
+     <button class="btn btn-success" @onclick="@GetResources">Show Resources</button>
+     <button class="btn btn-success">New Resources</button>
+</div>
 
-<br />
+<form id="commandPost" action="/PostCommand" method="post" style="display:block;">
+
+     <table class="table">
+          <thead class="thead-dark">
+               <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Link</th>
+                    <th>Langues</th>
+                    <th>Action</th>
+               </tr>
+          </thead>
+
+          <tbody>
+
+               <tr>
+                    <td><input type="text" name="Title" value="" /></td>
+                    <td><input type="text" name="Description" value="" /></td>
+                    <td><input type="text" name="Link" value="" /></td>
+                    <td><input type="text" name="Langues" value="" /></td>
+                    <td><button class="btn btn-success">Create</button></td>
+               </tr>
+
+          </tbody>
+
+     </table>
+
+</form>
 
 <table class="table">
      <thead class="thead-dark">

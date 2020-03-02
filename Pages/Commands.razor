@@ -3,17 +3,16 @@
 
 <h1>Commands</h1>
 
-<button class="btn btn-success" @onclick="@GetCommands">Get Commands List</button>
-<button class="btn btn-info" @onclick="@PostCommand">Create</button>
+<div class="mb-4">
+     <button class="btn btn-success" @onclick="@GetCommands">Show Commands</button>
+     <button class="btn btn-success" @onclick="@PostCommand">New Commands</button>
+</div>
 
-<br />
-
-<form id="commandPost" action="/PostCommand" method="post" style="display:@togglePost;">
+<form id="commandPost" action="/PostCommand" method="post" style="display:block;">
 
      <table class="table">
           <thead class="thead-dark">
                <tr>
-                    <th>Id</th>
                     <th>Title</th>
                     <th>Command</th>
                     <th>ConsoleType</th>
@@ -24,11 +23,10 @@
           <tbody>
                
                     <tr>
-                         <td><input type="type" name="name" value="" /></td>
-                         <td><input type="type" name="name" value="" /></td>
-                         <td><input type="type" name="name" value="" /></td>
-                         <td><input type="type" name="name" value="" /></td>
-                         <td><button class="btn btn-block">Edit</button></td>
+                         <td><input type="text" name="Title" value="" /></td>
+                         <td><input type="text" name="Command" value="" /></td>
+                         <td><input type="text" name="ConsoleType" value="" /></td>
+                         <td><button class="btn btn-success">Create</button></td>
                     </tr>
 
           </tbody>
@@ -56,7 +54,7 @@
                     <td>@item.Tile</td>
                     <td>@item.Command</td>
                     <td>@item.ConsoleType</td>
-                    <td><button class="btn btn-block">Edit</button></td>
+                    <td><button class="btn btn-success">Edit</button></td>
                </tr>
 
           }
@@ -89,21 +87,5 @@
           {
 
           });
-     }
-
-     public class TogglePost
-     {
-          TogglePost(string togglePost)
-          {
-               if (togglePost == "none")
-               {
-                    togglePost = "block";
-               }
-               else
-               {
-                    togglePost = "none";
-               }
-
-          }
      }
 }
