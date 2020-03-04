@@ -4,11 +4,10 @@
 <h1>Commands</h1>
 
 <div class="mb-4">
-     <button class="btn btn-success" @onclick="@GetCommands">Show Commands</button>
      <button class="btn btn-success" @onclick="@PostCommand">New Commands</button>
 </div>
 
-<form id="commandPost" action="/PostCommand" method="post" style="display:block;">
+<EditForm Model="@commandPost" OnVaildSubmit="@PostCommand">
 
      <table class="table">
           <thead class="thead-dark">
@@ -33,12 +32,11 @@
 
      </table>
 
-</form>
+</EditForm>
 
 <table class="table">
      <thead class="thead-dark">
           <tr>
-               <th>Id</th>
                <th>Title</th>
                <th>Command</th>
                <th>ConsoleType</th>
@@ -47,11 +45,10 @@
      </thead>
 
      <tbody>
-          @foreach (var item in @_commands)
+          @foreach (var item in _commandsList)
           {
-               <tr>                    
-                    <td>@item.Id</td>
-                    <td>@item.Tile</td>
+               <tr>
+                    <td>@item.Title</td>
                     <td>@item.Command</td>
                     <td>@item.ConsoleType</td>
                     <td><button class="btn btn-success">Edit</button></td>
@@ -64,25 +61,29 @@
 
 @code
 {
+     Commands commandPost = new Commands();
      public static string togglePost = "none";
 
-     List<_Command> _commands = new List<_Command>();
+     List<_Command> _commandsList = new List<_Command>();
 
-     private async Task GetCommands()
+     protected override async Task OnInitializedAsync()
      {
-          _commands = await Http.GetJsonAsync<List<_Command>>("http://developmentutilities.eastasia.azurecontainer.io/api/v1/Commands");
+          _commandsList = await Http.GetJsonAsync<List<_Command>>("https://localhost:5001/api/v1/Commands");
+          _commandsList = _commandsList.OrderByDescending(comd => comd.ConsoleType).ToList();
      }
 
      public partial class _Command
      {
           public int Id { get; set; }
-          public string Tile { get; set; }
+          public string Title { get; set; }
           public string Command { get; set; }
           public string ConsoleType { get; set; }
      }
 
      private async Task PostCommand()
      {
+
+
           await Http.SendJsonAsync(HttpMethod.Post, "/api/Customer", new _Command
           {
 
